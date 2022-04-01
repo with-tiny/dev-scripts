@@ -1,0 +1,45 @@
+{
+  "name": "@tiny-apps/dev-scripts",
+  "version": "0.0.1",
+  "description": "Tiny Development Scripts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "bin": {
+    "tiny-dev-scripts": "./dist/index.js"
+  },
+  "repository": "github:with-tiny/dev-scripts",
+  "scripts": {
+    "build": "node src/index.js build"
+  },
+  "keywords": [
+    "dev",
+    "development",
+    "scripts",
+    "npm",
+    "kcd"
+  ],
+  "author": {
+    "name": "xavikortes",
+    "email": "javiercortesveliz@gmail.com"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^21.0.3",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "cross-spawn": "^7.0.3",
+    "read-pkg-up": "^9.1.0",
+    "rollup": "^2.70.1",
+    "rollup-plugin-preserve-shebang": "^1.0.1"
+  }
+}
