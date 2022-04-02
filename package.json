@@ -1,6 +1,6 @@
 {
   "name": "@tiny-apps/dev-scripts",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Tiny Development Scripts",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
