@@ -12,58 +12,44 @@ function onwarn(message) {
   console.error(message)
 }
 
-export default async () => {
-  let tinyConf
-  try {
-    const tiny = await import(process.cwd() + '/.tiny.config.js');
-    tinyConf = tiny?.default?.rollup
-  }
-  catch {}
-  
-  const config = {
-    entries: tinyConf?.entries ?? {
-      index: 'src/index.js',
-    },
-    external: [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-      ...tinyConf?.external || []
-    ],
-    plugins: [
-      shebang(),
-      resolve({ preferBuiltins: true }),
-      json(),
-      commonjs(),
-      ...tinyConf?.plugins || []
-    ]
-  }
-
-  return [
+export const defaultConfig = {
+  entries: {
+    index: 'src/index.js',
+  },
+  external: [
+    ...Object.keys(pkg.dependencies || {}),
+    ...Object.keys(pkg.peerDependencies || {}),
+  ],
+  plugins: [
+    shebang(),
+    resolve({ preferBuiltins: true }),
+    json(),
+    commonjs(),
+  ],
+  onwarn,
+  outputs: [
     {
-      input: config.entries,
-      output: {
-        dir: 'dist',
-        format: 'esm',
-        sourcemap: 'inline',
-        entryFileNames: '[name].js',
-        exports: 'auto'
-      },
-      external: config.external,
-      plugins: config.plugins,
-      onwarn
+      dir: 'dist',
+      format: 'esm',
+      sourcemap: 'inline',
+      entryFileNames: '[name].mjs',
+      exports: 'named'
     },
     {
-      input: config.entries,
-      output: {
-        dir: 'dist',
-        format: 'cjs',
-        sourcemap: 'inline',
-        entryFileNames: '[name].cjs',
-        exports: 'auto'
-      },
-      external: config.external,
-      plugins: config.plugins,
-      onwarn
-    },
-  ]
+      dir: 'dist',
+      format: 'cjs',
+      sourcemap: 'inline',
+      entryFileNames: '[name].cjs',
+      exports: 'named'
+    }
+  ],
+  run: (config) => config.outputs.map(out => ({
+    input: config.entries,
+    output: out,
+    external: config.external,
+    plugins: config.plugins,
+    onwarn: config.onwarn
+  }))
 }
+
+export default async () => defaultConfig.run(defaultConfig)

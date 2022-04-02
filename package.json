@@ -1,11 +1,11 @@
 {
   "name": "@tiny-apps/dev-scripts",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Tiny Development Scripts",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "bin": {
-    "tiny-dev-scripts": "./dist/index.js"
+    "tiny-dev-scripts": "./dist/index.mjs"
   },
   "repository": "github:with-tiny/dev-scripts",
   "scripts": {
@@ -27,7 +27,7 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },

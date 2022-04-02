@@ -9,10 +9,10 @@ const deps = [
   ...Object.keys(pkg.devDependencies || {}),
   ...Object.keys(pkg.peerDependencies || {}),
 ]
-const rollupPath = deps.includes('@tiny-apps/dev-scripts') ? 'node_modules/@tiny-apps/dev-scripts/dist/config/rollup.js' : 'src/config/rollup.mjs'
+const rollupPath = `${process.cwd()}/rollup.config.js`
 
 const cmd = {
-  build: `rimraf dist && rollup -c ${rollupPath}`,
+  build: `rimraf dist && rollup --config ${rollupPath}`,
   // lint: "eslint --config ./dist/config/eslint.js --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
   // checktypes: "tsc --project ./dist/config/tsconfig.js",
   // prettier: "prettier --config ./dist/config/prettier.js --ignore-path .gitignore **/*.+(js|json|jsx|ts|tsx)",
