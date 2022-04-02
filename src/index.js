@@ -1,26 +1,24 @@
 #!/usr/bin/env node
 
 import spawn from 'cross-spawn'
-import fs from 'fs'
 
-const pkg = JSON.parse(fs.readFileSync(process.cwd() + '/package.json'))
-const deps = [
-  ...Object.keys(pkg.dependencies || {}),
-  ...Object.keys(pkg.devDependencies || {}),
-  ...Object.keys(pkg.peerDependencies || {}),
-]
-const rollupPath = `${process.cwd()}/rollup.config.js`
+const execCmd = {
+  rimraf: 'rimraf dist',
+  rollup: `rollup --config ${process.cwd()}/rollup.config.js`,
+  eslint: 'eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .',
+  prettier: 'prettier --ignore-path .gitignore **/*.+(js|json|jsx|ts|tsx)',
+}
 
 const cmd = {
-  build: `rimraf dist && rollup --config ${rollupPath}`,
-  // lint: "eslint --config ./dist/config/eslint.js --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
-  // checktypes: "tsc --project ./dist/config/tsconfig.js",
-  // prettier: "prettier --config ./dist/config/prettier.js --ignore-path .gitignore **/*.+(js|json|jsx|ts|tsx)",
-  // format: "npm run exec -- prettier --write",
-  // checkformat: "npm run exec -- prettier --list-different",
-  // lintstaged: "lint-staged",
-  // validate: "npm-run-all --parallel checktypes checkformat lint build",
-  // precommit: "npm run checktypes && npm run lintstaged && npm run build",
+  build: `${execCmd.rimraf} && ${execCmd.rollup}`,
+  lint: execCmd.eslint,
+  format: `${execCmd.prettier} --write`,
+  'check-format': `${execCmd.prettier} --list-different`,
+  // check-types: "tsc --project ./dist/config/tsconfig.js",
+  // lint-staged: "lint-staged",
+  // validate: "npm-run-all --parallel check-types check-format lint build",
+  // pre-commit: "npm run check-types && npm run lint-staged && npm run build", + test?
+  // prepublishOnly: "npm run validate", o como se llame + test?
   // test: "tiny-testing-library"
 }
 
@@ -41,17 +39,6 @@ if (Object.keys(cmd).includes(command)) {
     if (child !== 0) process.exit(child)
   }
   process.exit(child)
-}
-else {
+} else {
   console.log(`Unknown command ${command}`)
 }
-
-// build
-// lint
-// checkformat (no me lanza prettier con los argunmentos que le paso -list-different-)
-// format (no me lanza prettier con los argunmentos que le paso -write-)
-// checktypes
-// lintstaged
-// validate
-// precommit
-// test
