@@ -1,4 +1,4 @@
-import { defaultConfig } from './src/config/rollup.js'
+import { defaultConfig, runConfig } from './src/config/rollup.js'
 
 const rollupConfig = {
   ...defaultConfig,
@@ -10,4 +10,4 @@ const rollupConfig = {
   },
 }
 
-export default () => defaultConfig.run(rollupConfig)
+export default () => runConfig(rollupConfig)

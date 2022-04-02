@@ -36,15 +36,16 @@ export const defaultConfig = {
       entryFileNames: '[name].cjs',
       exports: 'named',
     },
-  ],
-  run: config =>
-    config.outputs.map(out => ({
-      input: config.entries,
-      output: out,
-      external: config.external,
-      plugins: config.plugins,
-      onwarn: config.onwarn,
-    })),
+  ]
 }
 
-export default async () => defaultConfig.run(defaultConfig)
+export const runConfig = config =>
+  config.outputs.map(out => ({
+    input: config.entries,
+    output: out,
+    external: config.external,
+    plugins: config.plugins,
+    onwarn: config.onwarn,
+  }))
+
+export default async () => runConfig(defaultConfig)
