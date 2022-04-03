@@ -10,6 +10,8 @@
 
 ## Installation
 
+Go to the root of your project and run:
+
 ```
 npm install -D @tiny-apps/dev-scripts
 ```
@@ -46,8 +48,8 @@ Powered by RollUp.
 You will need a rollup.config.js file in your project root. It should look like this:
 
 ```js
-import { defaultConfig, runConfig } from './node_modules/@tiny-apps/dev-scripts/dist/config/rollup.mjs'
-export default () => runConfig(defaultConfig)
+import config from './node_modules/@tiny-apps/dev-scripts/dist/config/rollup.mjs'
+export default config
 ```
 
 If you want to extend default configuration, you can do it overrinding defaultConfig. Here is an example:
