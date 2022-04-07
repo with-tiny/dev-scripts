@@ -26,7 +26,8 @@ Set package.json scripts to tiny-dev-scripts. These options are available
       "build": "tiny-dev-scripts build",
       "lint": "tiny-dev-scripts lint",
       "format": "tiny-dev-scripts format",
-      "check-format": "tiny-dev-scripts check-format"
+      "check-format": "tiny-dev-scripts check-format",
+      ...moreComingSoon
     }
   }
 ```
@@ -96,3 +97,16 @@ module.exports = require('./node_modules/@tiny-apps/dev-scripts/dist/config/pret
 ```
 
 If you want to extend default configuration, you can override it in the Prettier way.
+
+## Features
+
+✅ Build. with Rollup  
+✅ Lint. with ESLint  
+✅ Format. with Prettier  
+✅ Check-Format. with Prettier  
+🔲 Lint-Staged. Lint && Format. with Lint-Staged  
+🔲 Test. with Tiny-Testing-Library  
+🔲 Test-Watch. with Tiny-Testing-Library  
+🔲 Validate. Check-Format && Lint && Test && Build. with Npm-Run-All  
+🔲 Pre-Commit. Lint-Staged && Build. with Pre-Commit  
+🔲 Pre-Publish. Validate
